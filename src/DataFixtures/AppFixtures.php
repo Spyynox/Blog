@@ -16,6 +16,7 @@ class AppFixtures extends Fixture
             $users = array();
             for ($i = 0; $i < 10; $i++) {
                 $users[$i] = new User();
+                $users[$i]->setUsername($faker->userName());
                 $users[$i]->setFirstname($faker->firstName());
                 $users[$i]->setLastname($faker->lastName());
                 $users[$i]->setEmail($faker->email());
