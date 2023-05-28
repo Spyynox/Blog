@@ -15,43 +15,41 @@
     {% endif %}
 
     <section class="vh-100 gradient-custom">
-        <div class="container py-3 h-100">
+        <div class="container py-3">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg-dark text-white mb-2 rounded-10">
                         <div class="card-body p-5 text-center">
                             <div>
                                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-									<div class="form-outline form-white mb-4">
-                                        <label for="inputUsername" class="form-label">Username</label>
-                                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control form-control-lg" autocomplete="username" required autofocus>
-									</div>
+                                <div class="form-outline form-white mb-4">
+                                    <label for="inputUsername" class="form-label">Username</label>
+                                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control form-control-lg" autocomplete="username" required autofocus>
+                                </div>
 
-									<div class="form-outline form-white mb-4">
-                                        <label for="inputPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" id="inputPassword" class="form-control form-control-lg" autocomplete="current-password" required>
-									</div>
+                                <div class="form-outline form-white mb-4">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control form-control-lg" autocomplete="current-password" required>
+                                </div>
+
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me"> Remember me
+                                    </label>
+                                </div>
 
                                 <input type="hidden" name="_csrf_token"
                                     value="{{ csrf_token('authenticate') }}"
                                 >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+                                <button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Sign in</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    #}
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
+    </section>
 
-    <button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Sign in</button>
 </form>
 {% endblock %}
