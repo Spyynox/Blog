@@ -59,6 +59,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable;
@@ -203,6 +206,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }
