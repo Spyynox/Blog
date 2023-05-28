@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -62,10 +64,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $logo = null;
 
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Post::class, orphanRemoval: true)]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable;
         $this->updatedAt = new \DateTimeImmutable;
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +224,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getUserId() === $this) {
+                $post->setUserId(null);
+            }
+        }
 
         return $this;
     }
