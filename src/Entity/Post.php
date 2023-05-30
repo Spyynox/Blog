@@ -26,9 +26,15 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\ManyToOne(inversedBy: 'posts', fetch:"EAGER")]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    private ?User $author = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable;
+        $this->updatedAt = new \DateTimeImmutable;
+    }
 
     public function getId(): ?int
     {
@@ -85,12 +91,12 @@ class Post
 
     public function getUserId(): ?User
     {
-        return $this->user_id;
+        return $this->author;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUserId(?User $author): self
     {
-        $this->user_id = $user_id;
+        $this->author = $author;
 
         return $this;
     }
