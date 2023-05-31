@@ -26,6 +26,9 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     #[ORM\ManyToOne(inversedBy: 'posts', fetch:"EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
@@ -89,6 +92,18 @@ class Post
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     public function getUserId(): ?User
     {
         return $this->author;
@@ -100,4 +115,10 @@ class Post
 
         return $this;
     }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
 }

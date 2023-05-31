@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -36,6 +37,16 @@ class PostFormType extends AbstractType
                     new Length([
                         'min' => 10,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    ]),
+                ]
+            ])
+
+            ->add('image', UrlType::class, [
+                'attr' => ['class' => 'form-control form-control-lg'],
+                'label_attr' => ['class' => 'form-label'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a image',
                     ]),
                 ]
             ])

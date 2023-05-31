@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
-
+{% block title %}Blog{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/post/style.css') }}">
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="main-container">
+    <h1 class="text-center">Blog</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/PostController.php'|file_link(0) }}">src/Controller/PostController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/post/index.html.twig'|file_link(0) }}">templates/post/index.html.twig</a></code></li>
-    </ul>
+    <div class="section-blog">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-4 mt-3 mb-5">
+                    <div class="card w-90">
+                        <img class="card-img-top" src={{post.image}} alt="Card image cap" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Business, Travel <span class="text-blue">- {{post.createdAt|date('M d, Y H:i:s')}}</span></h6>
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>
+                            <a href="/blog/{{post.id}}" class="card-link">More...</a>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    {% if post.author.logo == null %}
+                                        <img src="{{ asset('img/profil/01.png') }}" alt="profil" width="50px" width="50px">
+                                    {% else %}
+                                        <img src="{{post.author.logo}}" alt="profil" width="50px" width="50px">
+                                    {% endif %}
+                                </div>
+                                <div class="col-10">
+                                    <div>{{post.author.firstname}}</div>
+                                    <div>{{post.author.lastname}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
