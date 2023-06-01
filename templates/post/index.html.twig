@@ -18,7 +18,11 @@
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted">Business, Travel <span class="text-blue">- {{post.createdAt|date('M d, Y H:i:s')}}</span></h6>
                             <h5 class="card-title">{{post.title}}</h5>
-                            <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>
+                            {% if post.content|length > 100 %}
+                                <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>
+                            {% else %}
+                                <p class="card-text mb-0">{{post.content}}</p>
+                            {% endif %}
                             <a href="/blog/{{post.id}}" class="card-link">More...</a>
                             <div class="row mt-2">
                                 <div class="col-2">
@@ -37,6 +41,7 @@
                     </div>
                 </div>
             {% endfor %}
+            {{ knp_pagination_render(posts, 'pagination.html.twig') }}
         </div>
     </div>
 </div>
