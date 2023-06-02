@@ -16,6 +16,43 @@
         {% endblock %}
     </head>
     <body>
+        <header class="bg-warning">
+            <nav class="navbar navbar-expand-lg navbar-light ms-auto me-auto mw-90">
+                <a class="navbar-brand" href="#">CAR DEALER</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto topnav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shop Pre-Owned</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shop New Cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Clearence Event</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary text-white" type="button" href="{{ path('app_login') }}">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-danger text-white" type="button" href="{{ path('app_register') }}">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
