@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -65,6 +66,12 @@ class RegistrationFormType extends AbstractType
             ])
 
             ->add('description', TextareaType::class, [
+                'attr' => ['class' => 'form-control form-control-lg'],
+                'label_attr' => ['class' => 'form-label'],
+                'required' => false,
+            ])
+
+            ->add('logo', UrlType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
                 'label_attr' => ['class' => 'form-label'],
                 'required' => false,

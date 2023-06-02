@@ -26,7 +26,7 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 1000)]
     private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts', fetch:"EAGER")]

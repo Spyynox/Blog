@@ -10,20 +10,17 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/blog', name: 'blog_')]
 class PostController extends AbstractController
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {
-    }
-
     #[Route('/', name: 'list')]
     public function index(Request $request, PaginatorInterface $paginator, PostRepository $postRepository): Response
     {
+        if ($this->getUser() === null) {
+            return $this->redirectToRoute('app_login');
+        }
         $data = $postRepository->findBy([],['createdAt' => 'desc']);
 
         $posts = $paginator->paginate(
@@ -47,10 +44,9 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setUserId($this->getUser());
 
-            // dd($post);
             $entityManager->persist($post);
             $entityManager->flush();
-            return new RedirectResponse($this->urlGenerator->generate('blog_list'));
+            return $this->redirectToRoute('blog_list');
         }
 
         return $this->render('post/new.html.twig', [
