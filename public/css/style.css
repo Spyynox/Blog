@@ -13,3 +13,9 @@
 .topnav a:hover {
     border-bottom: 3px solid white;
 }
+
+.profil-image_navbar {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
