@@ -14,7 +14,17 @@
                     <div class="card w-90">
                         <img class="card-img-top" src={{post.image}} alt="Card image cap" height="200px">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Business, Travel <span class="text-blue">- {{post.createdAt|date('M d, Y H:i:s')}}</span></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {% if post.categories|length > 0 %}
+                                    {% if post.categories|length > 1 %}
+                                        {{post.categories|first}}, ({{post.categories|length - 1}}) -
+                                    {% else %}
+                                        {{post.categories|first}} -
+                                    {% endif %}
+                                
+                                {% endif %}
+                                <span class="text-blue"> {{post.createdAt|date('M d, Y H:i:s')}}</span>
+                            </h6>
                             <h5 class="card-title">{{post.title}}</h5>
                             {% if post.content|length > 100 %}
                                 <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>

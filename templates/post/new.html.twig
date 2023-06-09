@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New blog{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
+{% endblock %}
 
 {% block body %}
     {{ form_start(postForm) }}
@@ -21,9 +24,24 @@
 										{{ form_row(postForm.content) }}
 									</div>
 
-									<div class="form-outline form-white mb-4">
+                                    <label class="form-label">Categories</label>
+                                    <ul class="list-group list-group-flush">
+                                        {% for label, value in field_choices(postForm.categories) %}
+                                            <li class="list-group-item">
+                                                {{ label }}
+                                                <label class="switch ">
+                                                    <input type="checkbox" class="primary" name="post_form[categories][]" value="{{value}}">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+
+									<div class="form-outline form-white mt-2 mb-4">
 										{{ form_row(postForm.image) }}
 									</div>
+
+                                    {{ form_row(postForm._token) }}
 
 									<button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Create blog</button>
 								</div>
@@ -33,6 +51,6 @@
 				</div>
 			</div>
 		</section>
-    {{ form_end(postForm) }}
+    {{ form_end(postForm, {'render_rest': false}) }}
 
 {% endblock %}

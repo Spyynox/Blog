@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Entity\Category;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,6 +52,14 @@ class PostFormType extends AbstractType
                         'message' => 'Please enter a image',
                     ]),
                 ]
+            ])
+
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'expanded' => true,
+                'multiple' => true,
+                'attr' => ['class' => 'form-control form-control-lg'],
+                'label_attr' => ['class' => 'form-label'],
             ])
         ;
     }

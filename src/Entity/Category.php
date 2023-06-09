@@ -18,7 +18,7 @@ class Category
     #[ORM\Column(length: 20)]
     private ?string $title = null;
 
-    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'categories')]
     private Collection $posts;
 
     public function __construct()
@@ -55,6 +55,7 @@ class Category
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
+            $post->addCategory($this);
         }
 
         return $this;
@@ -65,5 +66,10 @@ class Category
         $this->posts->removeElement($post);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
