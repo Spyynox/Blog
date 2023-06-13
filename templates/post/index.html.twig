@@ -14,17 +14,24 @@
                     <div class="card w-90">
                         <img class="card-img-top" src={{post.image}} alt="Card image cap" height="200px">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                {% if post.categories|length > 0 %}
-                                    {% if post.categories|length > 1 %}
-                                        {{post.categories|first}}, ({{post.categories|length - 1}}) -
-                                    {% else %}
-                                        {{post.categories|first}} -
-                                    {% endif %}
-                                
-                                {% endif %}
-                                <span class="text-blue"> {{post.createdAt|date('M d, Y H:i:s')}}</span>
-                            </h6>
+                            <div class="card-subtitle mb-2 text-muted row">
+                                <div class="col-8">
+                                    {% for categoryIndex, c in post.categories %}
+                                        {% if categoryIndex < 3 %}
+                                            <h6 class="d-inline-block col">
+                                                <span class="badge rounded-pill text-bg-primary">{{c.title}}</span>
+                                            </h6>
+                                        {% else %}
+                                            <h6 class="d-inline-block col">
+                                                <span class="badge rounded-pill text-bg-primary">
+                                                    + {{post.categories|length - 1}} autre{% if post.categories|length - 1 > 1 %}s{% endif %}
+                                                </span>
+                                            </h6>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="text-blue col-4 p-0"> {{post.createdAt|date('m/d/y H:i', 'Europe/Paris')}}</div>
+                            </div>
                             <h5 class="card-title">{{post.title}}</h5>
                             {% if post.content|length > 100 %}
                                 <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>
