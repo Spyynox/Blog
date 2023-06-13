@@ -2,7 +2,7 @@
 
 {% block title %}New blog{% endblock %}
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/post/style.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -24,18 +24,15 @@
 										{{ form_row(postForm.content) }}
 									</div>
 
-                                    <label class="form-label">Categories</label>
-                                    <ul class="list-group list-group-flush">
-                                        {% for label, value in field_choices(postForm.categories) %}
-                                            <li class="list-group-item">
-                                                {{ label }}
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="primary" name="post_form[categories][]" value="{{value}}">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
+                                    <label for="category-search_multi" class="mb-2">Categories</label>
+
+                                    <div class="form-outline form-white mb-4">
+                                            <select class="form-select" id="category-search_multi" data-placeholder="Please choose an category" name="post_form[categories][]" multiple>
+                                                {% for label, value in field_choices(postForm.categories) %}
+                                                    <option value="{{value}}">{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+									</div>
 
 									<div class="form-outline form-white mt-2 mb-4">
 										{{ form_row(postForm.image) }}
@@ -52,5 +49,7 @@
 			</div>
 		</section>
     {{ form_end(postForm, {'render_rest': false}) }}
+
+    <script type="text/javascript" src="{{ asset('js/post/newPost.js') }}"></script>
 
 {% endblock %}
