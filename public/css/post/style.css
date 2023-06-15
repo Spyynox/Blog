@@ -36,11 +36,7 @@
     border-right: 4px solid transparent;
 }
 
-.select2-selection__rendered {
-    /* margin-left: 7rem; */
-}
 
-.select2-selection--multiple {
-    height: 50px;
-    padding-top: 0.5rem;
+.h-6rem {
+    height: 6rem;
 }

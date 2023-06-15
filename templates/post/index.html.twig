@@ -14,21 +14,23 @@
                     <div class="card w-90">
                         <img class="card-img-top" src={{post.image}} alt="Card image cap" height="200px">
                         <div class="card-body">
-                            <div class="card-subtitle mb-2 text-muted row">
+                            <div class="card-subtitle mb-2 text-muted row h-6rem">
                                 <div class="col-8">
                                     {% for categoryIndex, c in post.categories %}
                                         {% if categoryIndex < 3 %}
                                             <h6 class="d-inline-block col">
                                                 <span class="badge rounded-pill text-bg-primary">{{c.title}}</span>
                                             </h6>
-                                        {% else %}
-                                            <h6 class="d-inline-block col">
-                                                <span class="badge rounded-pill text-bg-primary">
-                                                    + {{post.categories|length - 1}} autre{% if post.categories|length - 1 > 1 %}s{% endif %}
-                                                </span>
-                                            </h6>
                                         {% endif %}
                                     {% endfor %}
+
+                                    {% if post.categories|length >= 3 %}
+                                        <h6 class="d-inline-block col">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                + {{post.categories|length - 3}} autre{% if post.categories|length - 3 > 1 %}s{% endif %}
+                                            </span>
+                                        </h6>
+                                    {% endif %}
                                 </div>
                                 <div class="text-blue col-4 p-0"> {{post.createdAt|date('m/d/y H:i', 'Europe/Paris')}}</div>
                             </div>

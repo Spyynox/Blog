@@ -38,7 +38,6 @@ class Post
     private ?User $author = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
-    #[JoinTable(name: 'posts_categories')]
     private Collection $categories;
 
     public function __construct()
