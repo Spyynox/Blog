@@ -66,10 +66,6 @@ class AppFixtures extends Fixture
         $manager->persist($category);
         
         $category = new Category();
-        $category->setTitle('SaaS');
-        $manager->persist($category);
-        
-        $category = new Category();
         $category->setTitle('Business');
         $manager->persist($category);
         
