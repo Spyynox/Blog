@@ -34,6 +34,16 @@
                                             </select>
 									</div>
 
+                                    <label for="tag-search_multi" class="mb-2">Tags</label>
+
+                                    <div class="form-outline form-white mb-4">
+                                            <select class="form-select" id="tag-search_multi" data-placeholder="Please choose an tag" name="post_form[tags][]" multiple="multiple">
+                                                {% for label, value in field_choices(postForm.tags) %}
+                                                    <option value="{{value}}">{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+									</div>
+
 									<div class="form-outline form-white mt-2 mb-4">
 										{{ form_row(postForm.image) }}
 									</div>

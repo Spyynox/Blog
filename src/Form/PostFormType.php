@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Tag;
 use App\Entity\Post;
 use App\Entity\Category;
 use Doctrine\ORM\EntityRepository;
@@ -39,7 +40,7 @@ class PostFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 10,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Your content should be at least {{ limit }} characters',
                     ]),
                 ]
             ])
@@ -56,6 +57,14 @@ class PostFormType extends AbstractType
 
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
+                'expanded' => true,
+                'multiple' => true,
+                'attr' => ['class' => 'form-control form-control-lg'],
+                'label_attr' => ['class' => 'form-label'],
+            ])
+
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
                 'expanded' => true,
                 'multiple' => true,
                 'attr' => ['class' => 'form-control form-control-lg'],

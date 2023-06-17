@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\TagRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TagRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+#[UniqueEntity(fields: ['title'], message: 'There is already this title')]
 class Tag
 {
     #[ORM\Id]
@@ -15,10 +17,10 @@ class Tag
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique: true)]
     private ?string $title = null;
 
-    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'tags')]
+    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'tags')]
     private Collection $posts;
 
     public function __construct()
@@ -41,6 +43,11 @@ class Tag
         $this->title = $title;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     /**

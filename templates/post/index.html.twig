@@ -24,7 +24,7 @@
                                         {% endif %}
                                     {% endfor %}
 
-                                    {% if post.categories|length >= 3 %}
+                                    {% if post.categories|length > 3 %}
                                         <h6 class="d-inline-block col">
                                             <span class="badge rounded-pill text-bg-primary">
                                                 + {{post.categories|length - 3}} autre{% if post.categories|length - 3 > 1 %}s{% endif %}

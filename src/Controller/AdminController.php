@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Entity\Category;
+use App\Form\TagFormType;
 use App\Form\CategoryFormType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +26,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/category/new', name: 'new')]
+    #[Route('/category/new', name: 'new_category')]
     public function newBlog(Request $request, EntityManagerInterface $entityManager): Response
     {
         $post = new Category();
@@ -36,8 +38,25 @@ class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render('admin/new.html.twig', [
+        return $this->render('admin/category/new.html.twig', [
             'categoryForm' => $form->createView()
+        ]);
+    }
+
+    #[Route('/tag/new', name: 'new_tag')]
+    public function newTag(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $post = new Tag();
+        $form = $this->createForm(TagFormType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($post);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/tag/new.html.twig', [
+            'tagForm' => $form->createView()
         ]);
     }
 }

@@ -40,7 +40,7 @@ class Post
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
     private Collection $categories;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'posts')]
     private Collection $tags;
 
     public function __construct()
