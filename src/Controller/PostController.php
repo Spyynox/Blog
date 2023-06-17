@@ -54,4 +54,14 @@ class PostController extends AbstractController
             'postForm' => $form->createView()
         ]);
     }
+
+    #[Route('/{id}', name: 'detail')]
+    public function detail(PostRepository $postRepository, int $id): Response
+    {
+        $post = $postRepository->find($id);
+
+        return $this->render('post/detail.html.twig', [
+            'post' => $post,
+        ]);
+    }
 }
