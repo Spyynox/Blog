@@ -14,6 +14,10 @@
     border-radius: 50%;
 }
 
+.img-fluid {
+    height: 300px !important;
+}
+
 .select2-selection {
     -webkit-box-shadow: 0;
     box-shadow: 0;
@@ -34,6 +38,10 @@
     border-top: 5px solid #888;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
+}
+
+.select2-search--inline > textarea {
+    padding-bottom: 35px !important;
 }
 
 

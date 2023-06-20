@@ -32,7 +32,7 @@ class PostFormType extends AbstractType
             ])
 
             ->add('content', TextareaType::class, [
-                'attr' => ['class' => 'form-control form-control-lg'],
+                'attr' => ['class' => 'form-control form-control-lg', 'rows' => '10'],
                 'label_attr' => ['class' => 'form-label'],
                 'constraints' => [
                     new NotBlank([
@@ -60,7 +60,7 @@ class PostFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('tags', EntityType::class, [
@@ -68,7 +68,7 @@ class PostFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
+                'label_attr' => ['class' => 'form-label']
             ])
         ;
     }

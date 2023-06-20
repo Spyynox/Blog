@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 #[Route('/blog', name: 'blog_')]
 class PostController extends AbstractController
@@ -42,6 +43,9 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (count($post->getCategories()) === 0) {
+                throw new BadRequestHttpException('Please select at least one category', null, 400);
+            }
             $post->setUserId($this->getUser());
 
             $entityManager->persist($post);

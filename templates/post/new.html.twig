@@ -10,7 +10,7 @@
 		<section class="vh-100 gradient-custom">
 			<div class="container py-3 h-100">
 				<div class="row d-flex justify-content-center align-items-center h-100">
-					<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-8">
 						<div class="card bg-dark text-white mb-2 rounded-10">
 							<div class="card-body p-5 text-center">
 								<div>
@@ -27,21 +27,21 @@
                                     <label for="category-search_multi" class="mb-2">Categories</label>
 
                                     <div class="form-outline form-white mb-4">
-                                            <select class="form-select" id="category-search_multi" data-placeholder="Please choose an category" name="post_form[categories][]" multiple="multiple">
-                                                {% for label, value in field_choices(postForm.categories) %}
-                                                    <option value="{{value}}">{{ label }}</option>
-                                                {% endfor %}
-                                            </select>
+                                        <select class="form-select w-100" id="category-search_multi" data-placeholder="Please choose an category" name="post_form[categories][]" multiple="multiple" required="required">
+                                            {% for label, value in field_choices(postForm.categories) %}
+                                                <option value="{{value}}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
 									</div>
 
                                     <label for="tag-search_multi" class="mb-2">Tags</label>
 
                                     <div class="form-outline form-white mb-4">
-                                            <select class="form-select" id="tag-search_multi" data-placeholder="Please choose an tag" name="post_form[tags][]" multiple="multiple">
-                                                {% for label, value in field_choices(postForm.tags) %}
-                                                    <option value="{{value}}">{{ label }}</option>
-                                                {% endfor %}
-                                            </select>
+                                        <select class="form-select w-100" id="tag-search_multi" data-placeholder="Please choose an tag" name="post_form[tags][]" multiple="multiple">
+                                            {% for label, value in field_choices(postForm.tags) %}
+                                                <option value="{{value}}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
 									</div>
 
 									<div class="form-outline form-white mt-2 mb-4">

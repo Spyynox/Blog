@@ -18,7 +18,7 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 1000)]
+    #[ORM\Column(length: 100)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]

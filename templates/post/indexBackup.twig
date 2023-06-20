@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog List{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/post/style.css') }}">
+{% endblock %}
+{% block body %}
+<div class="main-container mt-5">
+    <div class="section-blog">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-4 mt-3 mb-5">
+                    <div class="card w-90">
+                        <img class="card-img-top" src={{post.image}} alt="Card image cap" height="200px">
+                        <div class="card-body">
+                            <div class="card-subtitle mb-2 text-muted row h-6rem">
+                                <div class="col-8">
+                                    {% for categoryIndex, c in post.categories %}
+                                        {% if categoryIndex < 3 %}
+                                            <h6 class="d-inline-block col">
+                                                <span class="badge rounded-pill text-bg-primary">{{c.title}}</span>
+                                            </h6>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if post.categories|length > 3 %}
+                                        <h6 class="d-inline-block col">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                + {{post.categories|length - 3}} autre{% if post.categories|length - 3 > 1 %}s{% endif %}
+                                            </span>
+                                        </h6>
+                                    {% endif %}
+                                </div>
+                                <div class="text-blue col-4 p-0"> {{post.createdAt|date('m/d/y H:i', 'Europe/Paris')}}</div>
+                            </div>
+                            <h5 class="card-title">{{post.title}}</h5>
+                            {% if post.content|length > 100 %}
+                                <p class="card-text mb-0">{{post.content|slice(0, 100)}}...</p>
+                            {% else %}
+                                <p class="card-text mb-0">{{post.content}}</p>
+                            {% endif %}
+                            <a href="/blog/{{post.id}}" class="card-link">More...</a>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    {% if post.author.logo == null %}
+                                        <img class="profil-image" src="{{ asset('img/profil/01.png') }}" alt="profil" />
+                                    {% else %}
+                                        <img class="profil-image" src="{{post.author.logo}}" alt="profil" />
+                                    {% endif %}
+                                </div>
+                                <div class="col-10">
+                                    <div>{{post.author.firstname}}</div>
+                                    <div>{{post.author.lastname}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {{ knp_pagination_render(posts, 'pagination.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}
