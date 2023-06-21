@@ -44,7 +44,11 @@
     padding-bottom: 35px !important;
 }
 
-
 .h-6rem {
     height: 6rem;
+}
+
+.img-profile {
+    width: 80px;
+    height: 80px;
 }
