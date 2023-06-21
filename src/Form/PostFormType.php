@@ -62,14 +62,6 @@ class PostFormType extends AbstractType
                 'attr' => ['class' => 'form-control form-control-lg'],
                 'label_attr' => ['class' => 'form-label']
             ])
-
-            ->add('tags', EntityType::class, [
-                'class' => Tag::class,
-                'expanded' => true,
-                'multiple' => true,
-                'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label']
-            ])
         ;
     }
 
