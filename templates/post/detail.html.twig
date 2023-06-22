@@ -43,7 +43,7 @@
                                 </figure>
                                 <div class="w-100">
                                     <p>{{comment.content|nl2br}}</p>
-                                    {% if comment.createdAt == comment.updatedAt %}
+                                    {% if comment.createdAt != comment.updatedAt %}
                                         <span class="d-block text-right tm-color-primary">Édité le {{comment.updatedAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
                                     {% endif %}
                                 </div>
@@ -54,10 +54,7 @@
 
                     <div class="mb-5 tm-comment-form ml-auto mr-auto">
                         {{ form_start(commmentForm) }}
-                                <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
-                                <div class="mb-4">
-                                    {{ form_row(commmentForm.title) }}
-                                </div>
+                                <h2 class="tm-color-primary tm-post-title mb-4">Créez votre commentaire</h2>
                                 <div class="mb-4">
                                     {{ form_row(commmentForm.content) }}
                                 </div>
