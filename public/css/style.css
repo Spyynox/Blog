@@ -19,3 +19,7 @@
 .mw-90 {
     max-width: 90% !important;
 }
+
+.pointer {
+    cursor: pointer;
+}

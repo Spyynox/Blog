@@ -10,8 +10,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/comment', name: 'comment_')]
@@ -34,5 +32,18 @@ class CommentController extends AbstractController
             'id' => $id,
             'commentForm' => $form->createView()
         ]);
+    }
+
+    #[Route('/api/remove/{id}', name: 'api_edit')]
+    public function Put(Comment $comment, Request $request, EntityManagerInterface $em): Response
+    {
+        $data = json_decode($request->getContent());
+        $comment->setPublished(false);
+        $comment->setUpdatedAt(new \DateTimeImmutable);
+
+        $em->persist($comment);
+        $em->flush();
+
+        return new Response('Your comment is deleted', 200);
     }
 }
