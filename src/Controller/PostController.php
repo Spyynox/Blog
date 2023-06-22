@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Form\PostFormType;
+use App\Form\CommentFormType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -60,12 +62,29 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}', name: 'detail')]
-    public function detail(PostRepository $postRepository, int $id): Response
+    public function detail(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, int $id): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentFormType::class, $comment);
+        $form->handleRequest($request);
+
         $post = $postRepository->find($id);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setPublished(true);
+            $comment->setPost($post);
+            $comment->setAuthor($this->getUser());
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('blog_detail', [
+                'id' => $id
+            ]);
+        }
+
 
         return $this->render('post/detail.html.twig', [
             'post' => $post,
+            'commmentForm' => $form->createView()
         ]);
     }
 }

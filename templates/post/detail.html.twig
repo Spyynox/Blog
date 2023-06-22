@@ -26,52 +26,46 @@
                 <div>
                     <h2 class="tm-color-primary tm-post-title">Comments</h2>
                     <hr class="tm-hr-primary tm-mb-45">
-                    <div class="tm-comment tm-mb-45">
-                        <figure class="tm-comment-figure">
-                            <img src="{{ asset('img/profil/01.png') }}" alt="Image" class="mb-2 rounded-circle img-profile">
-                            <figcaption class="tm-color-primary text-center">Mark Sonny</figcaption>
-                        </figure>
-                        <div>
-                            <p>
-                                Praesent aliquam ex vel lectus ornare tritique. Nunc et eros
-                                quis enim feugiat tincidunt et vitae dui. Nullam consectetur
-                                justo ac ex laoreet rhoncus. Nunc id leo pretium, faucibus
-                                sapien vel, euismod turpis.
-                            </p>
-                            <span class="d-block text-right tm-color-primary">June 14, 2020</span>
-                        </div>
+                    {% for comment in post.comments %}
+                        {% if comment.published %}
+                        {# <pre>
+                            {{ dump(comment) }}
+                        </pre> #}
+                            <div class="tm-comment tm-mb-45">
+                                <figure class="tm-comment-figure col-3">
+                                    {% if comment.author.logo == null %}
+                                        <img src="{{ asset('img/profil/01.png') }}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
+                                    {% else %}
+                                        <img src="{{comment.author.logo}}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
+                                    {% endif %}
+                                    <figcaption class="tm-color-primary text-center">{{comment.author.username}}</figcaption>
+                                    <span class="d-block text-center">{{comment.createdAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
+                                </figure>
+                                <div class="w-100">
+                                    <p>{{comment.content|nl2br}}</p>
+                                    {% if comment.createdAt == comment.updatedAt %}
+                                        <span class="d-block text-right tm-color-primary">Édité le {{comment.updatedAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr/>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="mb-5 tm-comment-form ml-auto mr-auto">
+                        {{ form_start(commmentForm) }}
+                                <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
+                                <div class="mb-4">
+                                    {{ form_row(commmentForm.title) }}
+                                </div>
+                                <div class="mb-4">
+                                    {{ form_row(commmentForm.content) }}
+                                </div>
+                                <div class="text-right">
+                                    <button class="tm-btn tm-btn-primary tm-btn-small" type="submit">Submit</button>
+                                </div>
+                        {{ form_end(commmentForm) }}
                     </div>
-                    <hr/>
-                    <div class="tm-comment tm-mb-45">
-                        <hr>
-                        <div class="tm-comment">
-                            <figure class="tm-comment-figure">
-                                <img src="img/comment-2.jpg" alt="Image" class="mb-2 rounded-circle img-profile">
-                                <figcaption class="tm-color-primary text-center">Jewel Soft</figcaption>
-                            </figure>
-                            <p>
-                                Nunc et eros quis enim feugiat tincidunt et vitae dui.
-                                Nullam consectetur justo ac ex laoreet rhoncus. Nunc
-                                id leo pretium, faucibus sapien vel, euismod turpis.
-                            </p>
-                        </div>
-                        <span class="d-block text-right tm-color-primary">June 21, 2020</span>
-                    </div>
-                    <form action="" class="mb-5 tm-comment-form ml-auto mr-auto">
-                        <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
-                        <div class="mb-4">
-                            <input class="form-control" name="name" type="text">
-                        </div>
-                        <div class="mb-4">
-                            <input class="form-control" name="email" type="text">
-                        </div>
-                        <div class="mb-4">
-                            <textarea class="form-control" name="message" rows="6"></textarea>
-                        </div>
-                        <div class="text-right">
-                            <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
