@@ -24,36 +24,36 @@
                 </div>
 
                 <div>
-                    <h2 class="tm-color-primary tm-post-title">Comments</h2>
+                    <h2 class="tm-color-primary tm-post-title">Comments ({{comments|length}})</h2>
                     <hr class="tm-hr-primary tm-mb-45">
-                    {% for comment in post.comments %}
-                        {% if comment.published %}
-                            <div class="comment-container" data-id="{{comment.id}}">
-                                <div class="tm-comment tm-mb-45">
-                                    <figure class="tm-comment-figure col-3">
-                                        {% if comment.author.logo == null %}
-                                            <img src="{{ asset('img/profil/01.png') }}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
-                                        {% else %}
-                                            <img src="{{comment.author.logo}}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
-                                        {% endif %}
-                                        <figcaption class="tm-color-primary text-center">{{comment.author.username}}</figcaption>
-                                        <span class="d-block text-center">{{comment.createdAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
-                                        <div class="d-flex justify-content-around bd-highlight">
-                                            <a href="{{ path('comment_edit', {id: comment.id}) }}">Éditer</a>
-                                            <span class="pointer text-danger commentRemove" data-key="{{comment.id}}">Supprimer</span>
-                                        </div>
-                                    </figure>
-                                    <div class="w-100">
-                                        <p>{{comment.content|nl2br}}</p>
-                                        {% if comment.createdAt != comment.updatedAt %}
-                                            <span class="d-block text-right tm-color-primary">Édité le {{comment.updatedAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
-                                        {% endif %}
+                    {% for comment in comments %}
+                        <div class="comment-container" data-id="{{comment.id}}">
+                            <div class="tm-comment tm-mb-45">
+                                <figure class="tm-comment-figure col-3">
+                                    {% if comment.author.logo == null %}
+                                        <img src="{{ asset('img/profil/01.png') }}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
+                                    {% else %}
+                                        <img src="{{comment.author.logo}}" alt="Image" class="mb-2 rounded-circle img-profile d-block ml-auto mr-auto">
+                                    {% endif %}
+                                    <figcaption class="tm-color-primary text-center">{{comment.author.username}}</figcaption>
+                                    <span class="d-block text-center">{{comment.createdAt|date('d/m/y à H:m', 'Europe/Paris')}}</span>
+                                    <div class="d-flex justify-content-around bd-highlight">
+                                        <a href="{{ path('comment_edit', {id: comment.id}) }}">Éditer</a>
+                                        <span class="pointer text-danger commentRemove" data-key="{{comment.id}}">Supprimer</span>
                                     </div>
+                                </figure>
+                                <div class="w-100">
+                                    <p>{{comment.content|nl2br}}</p>
+                                    {% if comment.createdAt != comment.updatedAt %}
+                                        <span class="d-block text-right tm-color-primary">Édité le {{comment.updatedAt|date('d/m/y à H:s', 'Europe/Paris')}}</span>
+                                    {% endif %}
                                 </div>
-                                <hr/>
                             </div>
-                        {% endif %}
+                            <hr/>
+                        </div>
                     {% endfor %}
+
+                    {{ knp_pagination_render(comments, 'pagination.html.twig') }}
 
                     <div class="mb-5 tm-comment-form ml-auto mr-auto">
                         {{ form_start(commmentForm) }}

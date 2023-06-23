@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,13 +62,24 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}', name: 'detail')]
-    public function detail(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, int $id): Response
+    public function detail(
+        Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository,
+        int $id, CommentRepository $commentRepository, PaginatorInterface $paginator
+    ): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
 
         $post = $postRepository->find($id);
+        $commentsData = $commentRepository->list($post);
+
+        $comments = $paginator->paginate(
+            $commentsData,
+            $request->query->getInt('page', 1),
+            2
+        );
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPublished(true);
             $comment->setPost($post);
@@ -83,7 +95,8 @@ class PostController extends AbstractController
 
         return $this->render('post/detail.html.twig', [
             'post' => $post,
-            'commmentForm' => $form->createView()
+            'commmentForm' => $form->createView(),
+            'comments' => $comments
         ]);
     }
 }

@@ -39,6 +39,19 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    function list(object $post): array
+    {
+        return $this->createQueryBuilder('c')
+           ->join('c.post', 'post')
+           ->where('post.id = :id')
+           ->andWhere('c.published = true')
+           ->setParameter('id', $post->getId())
+           ->orderBy('c.createdAt', 'ASC')
+           ->getQuery()
+           ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
