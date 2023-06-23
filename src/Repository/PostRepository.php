@@ -39,6 +39,17 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    function lastBlog(): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where($qb->expr()->notIn('p.id', ':id'))
+           ->setParameter('id', 1)
+           ->orderBy('p.createdAt', 'DESC')
+           ->setMaxResults(3)
+        ;
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

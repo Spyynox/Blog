@@ -73,6 +73,7 @@ class PostController extends AbstractController
 
         $post = $postRepository->find($id);
         $commentsData = $commentRepository->list($post);
+        $lastposts = $postRepository->lastBlog();
 
         $comments = $paginator->paginate(
             $commentsData,
@@ -96,7 +97,8 @@ class PostController extends AbstractController
         return $this->render('post/detail.html.twig', [
             'post' => $post,
             'commmentForm' => $form->createView(),
-            'comments' => $comments
+            'comments' => $comments,
+            'lastposts' => $lastposts,
         ]);
     }
 }

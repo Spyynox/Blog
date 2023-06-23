@@ -18,6 +18,11 @@
     height: 300px !important;
 }
 
+.img-detail {
+    max-width: 100%;
+    height: 200px;
+}
+
 .select2-selection {
     -webkit-box-shadow: 0;
     box-shadow: 0;
