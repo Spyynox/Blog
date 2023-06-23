@@ -8,6 +8,7 @@ use App\Form\PostFormType;
 use App\Form\CommentFormType;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,6 +100,27 @@ class PostController extends AbstractController
             'commmentForm' => $form->createView(),
             'comments' => $comments,
             'lastposts' => $lastposts,
+        ]);
+    }
+
+    #[Route('/category/{id}', name: 'posts_in_category')]
+    public function postsInCategorie(
+        PostRepository $postRepository, CategoryRepository $categoryRepository, int $id,
+        PaginatorInterface $paginator, Request $request
+    ): Response
+    {
+        $data = $postRepository->postsInCategory($id);
+        $category = $categoryRepository->find($id);
+
+        $posts = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('post/posts_in_category.html.twig', [
+            'category' => $category,
+            'posts' => $posts
         ]);
     }
 }

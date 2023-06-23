@@ -76,7 +76,7 @@
                 <ul class="tm-mb-75 pl-5 tm-category-list">
                     {% for category in post.categories %}
                         <li>
-                            <a href="#" class="tm-color-primary">{{category.title}}</a>
+                            <a href="{{ path('blog_posts_in_category', {id: category.id}) }}" class="tm-color-primary">{{category.title}}</a>
                         </li>
                     {% endfor %}
                 </ul>
