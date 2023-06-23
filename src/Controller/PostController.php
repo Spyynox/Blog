@@ -77,7 +77,7 @@ class PostController extends AbstractController
         $comments = $paginator->paginate(
             $commentsData,
             $request->query->getInt('page', 1),
-            2
+            5
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
