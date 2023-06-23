@@ -73,7 +73,7 @@ class PostController extends AbstractController
 
         $post = $postRepository->find($id);
         $commentsData = $commentRepository->list($post);
-        $lastposts = $postRepository->lastBlog();
+        $lastposts = $postRepository->lastPosts($id);
 
         $comments = $paginator->paginate(
             $commentsData,

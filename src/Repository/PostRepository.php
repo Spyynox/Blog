@@ -39,11 +39,11 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    function lastBlog(): array
+    function lastPosts(int $id): array
     {
         $qb = $this->createQueryBuilder('p');
         $qb->where($qb->expr()->notIn('p.id', ':id'))
-           ->setParameter('id', 1)
+           ->setParameter('id', $id)
            ->orderBy('p.createdAt', 'DESC')
            ->setMaxResults(3)
         ;
