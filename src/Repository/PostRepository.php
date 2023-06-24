@@ -61,6 +61,18 @@ class PostRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    function postsInUser(int $id): array
+    {
+        return $this->createQueryBuilder('p')
+           ->join('p.author', 'author')
+           ->where('author.id = :id')
+           ->setParameter('id', $id)
+           ->orderBy('p.createdAt', 'DESC')
+           ->getQuery()
+           ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

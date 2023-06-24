@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    {{ form_start(userForm) }}
+		<section class="gradient-custom">
+			<div class="container py-3 h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-8">
+						<div class="card bg-dark text-white mb-2 rounded-10">
+							<div class="card-body p-5 text-center">
+								<div>
+									<h2 class="fw-bold mb-2 text-uppercase">Édition de mon profil</h2>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.username) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.firstname) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.lastname) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.email) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.description) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.logo) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(userForm.password) }}
+									</div>
+
+									<button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Éditer</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+    {{ form_end(userForm) }}
+
+{% endblock %}
