@@ -9,7 +9,13 @@
         <div class="col-lg-8 tm-post-col">
             <div>
                 <div class="mb-4">
-                    <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
+                    <div class="d-flex justify-content-between">
+                        <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
+                        <div class="d-flex mt-2">
+                            <a class="text-primary mr-2" href="#">Éditer</a>
+                            <a class="text-danger" href="#">Supprimer</a>
+                        </div>
+                    </div>
                     <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by
                         <a href="{{ path('user_profile', {id: post.author.id}) }}">{{post.author.username}}</a>
                     </p>
