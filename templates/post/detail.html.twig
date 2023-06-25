@@ -10,7 +10,9 @@
             <div>
                 <div class="mb-4">
                     <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
-                    <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by {{post.author.username}}</p>
+                    <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by
+                        <a href="{{ path('user_profile', {id: post.author.id}) }}">{{post.author.username}}</a>
+                    </p>
                     <p>{{post.content|nl2br}}</p>
                     <span class="d-block text-right tm-color-primary">
                         {% for categoryIndex, c in post.categories %}

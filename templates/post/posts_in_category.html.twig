@@ -51,7 +51,9 @@
                 <hr>
                 <div class="d-flex justify-content-between">
                     <span>{{post.comments|length}} commentaire(s)</span>
-                    <span>by {{post.author.username}}</span>
+                    <span>by
+                        <a href="{{ path('user_profile', {id: post.author.id}) }}">{{post.author.username}}</a>
+                    </span>
                 </div>
             </article>
         {% endfor %}
