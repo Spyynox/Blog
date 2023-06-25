@@ -30,7 +30,7 @@
 }
 
 .sidebar .logo-details .logo_name {
-    font-size: 22px;
+    font-size: 15px;
     color: #fff;
     font-weight: 600;
     transition: 0.3s ease;
@@ -260,7 +260,19 @@
     font-weight: 600;
 }
 
+.project-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
 @media (max-width: 400px) {
+    .project-logo {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+    }
+
     .sidebar.close .nav-links li .sub-menu {
         display: none;
     }
