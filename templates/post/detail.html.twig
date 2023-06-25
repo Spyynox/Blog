@@ -37,10 +37,12 @@
                                     {% endif %}
                                     <figcaption class="tm-color-primary text-center">{{comment.author.username}}</figcaption>
                                     <span class="d-block text-center">{{comment.createdAt|date('d/m/y à H:m', 'Europe/Paris')}}</span>
-                                    <div class="d-flex justify-content-around bd-highlight">
-                                        <a href="{{ path('comment_edit', {id: comment.id}) }}">Éditer</a>
-                                        <span class="pointer text-danger commentRemove" data-key="{{comment.id}}">Supprimer</span>
-                                    </div>
+                                    {% if app.user and comment.author.id == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
+                                        <div class="d-flex justify-content-around bd-highlight">
+                                            <a href="{{ path('comment_edit', {id: comment.id}) }}">Éditer</a>
+                                            <span class="pointer text-danger commentRemove" data-key="{{comment.id}}">Supprimer</span>
+                                        </div>
+                                    {% endif %}
                                 </figure>
                                 <div class="w-100">
                                     <p>{{comment.content|nl2br}}</p>
@@ -56,7 +58,8 @@
                     {{ knp_pagination_render(comments, 'pagination.html.twig') }}
 
                     <div class="mb-5 tm-comment-form ml-auto mr-auto">
-                        {{ form_start(commmentForm) }}
+                        {% if app.user %}
+                            {{ form_start(commmentForm) }}
                                 <h2 class="tm-color-primary tm-post-title mb-4">Créez votre commentaire</h2>
                                 <div class="mb-4">
                                     {{ form_row(commmentForm.content) }}
@@ -64,7 +67,15 @@
                                 <div class="text-right">
                                     <button class="tm-btn tm-btn-primary tm-btn-small" type="submit">Submit</button>
                                 </div>
-                        {{ form_end(commmentForm) }}
+                            {{ form_end(commmentForm) }}
+                        {% else %}
+                            <h2 class="tm-color-primary tm-post-title mb-4">Voulez-vous créer un commentaire?</h2>
+                            <div>
+                                <a href="{{ path('app_login') }}">Connectez-vous</a>
+                                <span>ou</span>
+                                <a href="{{ path('app_register') }}">Inscrivez-vous</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

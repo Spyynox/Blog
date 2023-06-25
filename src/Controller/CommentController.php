@@ -18,6 +18,14 @@ class CommentController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(Comment $comment, Request $request, EntityManagerInterface $em, int $id): Response
     {
+        if (
+            $this->getUser() === null ||
+            $comment->getAuthor()->getUsername() !== $this->getUser()->getUserIdentifier() ||
+            !in_array('ROLE_ADMIN', $comment->getAuthor()->getRoles())
+            ) {
+                $route = $request->headers->get('referer');
+                return $this->redirect($route);
+        }
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
