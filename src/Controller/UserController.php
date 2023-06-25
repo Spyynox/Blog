@@ -42,25 +42,38 @@ class UserController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher
     ): Response
     {
-        $form = $this->createForm(UserFormType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-            $user->setUpdatedAt(new \DateTimeImmutable);
-            $em->persist($user);
-            $em->flush();
-            return $this->redirectToRoute('user_profile', [
-                'id' => $id
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (
+            $user->getUsername() == $this->getUser()->getUserIdentifier() ||
+            in_array('ROLE_ADMIN', $this->getUser()->getRoles())
+            )
+        {
+            $form = $this->createForm(UserFormType::class, $user);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $user->setUpdatedAt(new \DateTimeImmutable);
+                $em->persist($user);
+                $em->flush();
+                return $this->redirectToRoute('user_profile', [
+                    'id' => $id
+                ]);
+            }
+            return $this->render('user/edit.html.twig', [
+                'id' => $id,
+                'userForm' => $form->createView()
             ]);
+        } else {
+            $route = $request->headers->get('referer');
+            if ($route === null) {
+                return $this->redirectToRoute('blog_list');
+            }
+            return $this->redirect($route);
         }
-        return $this->render('user/edit.html.twig', [
-            'id' => $id,
-            'userForm' => $form->createView()
-        ]);
     }
 }

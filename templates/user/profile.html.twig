@@ -10,13 +10,19 @@
                     <div class="card">
                         <div class="rounded-top text-white d-flex flex-row bg-black h-200px">
                             <div class="ms-4 mt-5 d-flex flex-column w-150px h-220px">
-                                <img src="{{user.logo}}"
-                                    alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2 w-150px z-index-1 h-200px"
-                                >
+                                {% if app.user and app.user.logo == null %}
+                                    <img src="{{ asset('img/profil/01.png') }}" alt="image logo"
+                                        class="img-fluid img-thumbnail mt-4 mb-2 w-150px z-index-1 h-200px"
+                                    >
+                                {% else %}
+                                    <img src="{{user.logo}}" alt="image logo"
+                                        class="img-fluid img-thumbnail mt-4 mb-2 w-150px z-index-1 h-200px"
+                                    >
+                                {% endif %}
                                 {% if app.user %}
-                                    <button type="button" class="btn btn-outline-dark z-index-1" data-mdb-ripple-color="dark">
+                                    <a class="btn btn-outline-dark z-index-1" href="{{ path('user_edit', {id: user.id}) }}">
                                         Éditer profil
-                                    </button>
+                                    </a>
                                 {% endif %}
                             </div>
                             <div class="ms-3 mt-130px">

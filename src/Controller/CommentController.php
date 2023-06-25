@@ -18,28 +18,33 @@ class CommentController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(Comment $comment, Request $request, EntityManagerInterface $em, int $id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if (
-            $this->getUser() === null ||
-            $comment->getAuthor()->getUsername() !== $this->getUser()->getUserIdentifier() ||
-            !in_array('ROLE_ADMIN', $comment->getAuthor()->getRoles())
-            ) {
-                $route = $request->headers->get('referer');
-                return $this->redirect($route);
-        }
-        $form = $this->createForm(CommentFormType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUpdatedAt(new \DateTimeImmutable);
-            $em->persist($comment);
-            $em->flush();
-            return $this->redirectToRoute('blog_detail', [
-                'id' => $comment->getPost()->getId()
+            $comment->getAuthor()->getUsername() === $this->getUser()->getUserIdentifier() ||
+            in_array('ROLE_ADMIN', $comment->getAuthor()->getRoles())
+            )
+        {
+            $form = $this->createForm(CommentFormType::class, $comment);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $comment->setUpdatedAt(new \DateTimeImmutable);
+                $em->persist($comment);
+                $em->flush();
+                return $this->redirectToRoute('blog_detail', [
+                    'id' => $comment->getPost()->getId()
+                ]);
+            }
+            return $this->render('comment/edit.html.twig', [
+                'id' => $id,
+                'commentForm' => $form->createView()
             ]);
+        } else {
+            $route = $request->headers->get('referer');
+            if ($route === null) {
+                return $this->redirectToRoute('blog_list');
+            }
+            return $this->redirect($route);
         }
-        return $this->render('comment/edit.html.twig', [
-            'id' => $id,
-            'commentForm' => $form->createView()
-        ]);
     }
 
     #[Route('/api/remove/{id}', name: 'api_edit')]
