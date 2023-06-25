@@ -16,8 +16,20 @@
     width: 90% !important;
 }
 
+.w-150px {
+    width: 150px !important;
+}
+
 .mw-90 {
     max-width: 90% !important;
+}
+
+.h-200px {
+    height: 200px !important;
+}
+
+.h-220px {
+    height: 220px !important;
 }
 
 .pointer {
@@ -49,4 +61,24 @@
 .back-to-top {
     -webkit-animation: action 1s infinite alternate;
     animation: action 1s infinite alternate;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}
+
+.bg-grey-very-light {
+    background-color: #f8f9fa;
+}
+
+.z-index-1 {
+    z-index: 1 !important;
+}
+
+.mt-130px {
+    margin-top: 130px !important;
+}
+
+.rounded-15 {
+    border-radius: 15px !important;
 }

@@ -8,26 +8,25 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-9 col-xl-12">
                     <div class="card">
-                        <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-                            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:220px;">
+                        <div class="rounded-top text-white d-flex flex-row bg-black h-200px">
+                            <div class="ms-4 mt-5 d-flex flex-column w-150px h-220px">
                                 <img src="{{user.logo}}"
-                                    alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                    style="width: 150px; z-index: 1; height:200px;">
+                                    alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2 w-150px z-index-1 h-200px"
+                                >
                                 {% if app.user %}
-                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                        style="z-index: 1;">
+                                    <button type="button" class="btn btn-outline-dark z-index-1" data-mdb-ripple-color="dark">
                                         Éditer profil
                                     </button>
                                 {% endif %}
                             </div>
-                            <div class="ms-3" style="margin-top: 130px;">
-                            <h5>{{user.username}}</h5>
-                            {% if app.user and app.user.id == user.id %}
-                                <p>{{user.firstname}} {{user.lastname}}</p>
-                            {% endif %}
+                            <div class="ms-3 mt-130px">
+                                <h5>{{user.username}}</h5>
+                                {% if app.user and app.user.id == user.id %}
+                                    <p>{{user.firstname}} {{user.lastname}}</p>
+                                {% endif %}
                             </div>
                         </div>
-                        <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                        <div class="p-4 text-black bg-grey-very-light">
                             <div class="d-flex justify-content-end text-center py-1">
                             <div>
                                 <p class="mb-1 h5">{{user.posts|length}}</p>
@@ -42,7 +41,7 @@
                         <div class="card-body p-4 text-black">
                             <div class="mb-5">
                                 <p class="lead fw-normal mb-1">À propos de {{user.username}}</p>
-                                <div class="p-4" style="background-color: #f8f9fa;">
+                                <div class="p-4 bg-grey-very-light">
                                     <p class="font-italic mb-1">
                                         {% if user.description == null %}
                                             Pas de description
@@ -57,7 +56,7 @@
                             </div>
 
                             {% for post in posts %}
-                                <div class="card mb-5" style="border-radius: 15px;">
+                                <div class="card mb-5 rounded-15">
                                     <div class="card-body p-4">
                                         <h3 class="mb-3">{{post.title}}</h3>
                                         <p class="small mb-0">
