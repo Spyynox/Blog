@@ -47,8 +47,8 @@ class CommentController extends AbstractController
         }
     }
 
-    #[Route('/api/remove/{id}', name: 'api_edit')]
-    public function Put(Comment $comment, Request $request, EntityManagerInterface $em): Response
+    #[Route('/api/remove/{id}', name: 'api_remove')]
+    public function changePublisedStatus(Comment $comment, Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent());
         $comment->setPublished(false);

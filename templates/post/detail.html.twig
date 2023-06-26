@@ -124,7 +124,7 @@
 
         $('#remove-comment_submit').click(function () {
             const key = $('#removeComentModal').attr('data-key');
-            let url = "{{ path('comment_api_edit', {'id': '__ID__'}) }}";
+            let url = "{{ path('comment_api_remove', {'id': '__ID__'}) }}";
             url = url.replace("__ID__", key);
             $.ajax({
                 type: 'POST',
