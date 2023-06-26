@@ -6,6 +6,12 @@
 {% endblock %}
 {% block body %}
     {% set today = "now"|date('d-m-Y H:i') %}
+    <h1 class="d-block text-center text-primary">
+        <u>Blogs</u>
+    </h1>
+    {% if posts|length == 0 %}
+        <div>Il n'y a pas de blog? <a href="{{path('blog_new')}}">Créez-en un!</a></div>
+    {% endif %}
     <div class="row">
         {% for post in posts %}
             {% set datePost = post.createdAt|date('d-m-Y H:i') %}

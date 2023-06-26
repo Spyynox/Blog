@@ -30,6 +30,13 @@ class UserController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
+        if ($user == null) {
+            $route = $request->headers->get('referer');
+            if ($route === null) {
+                return $this->redirectToRoute('blog_list');
+            }
+            return $this->redirect($route);
+        }
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts

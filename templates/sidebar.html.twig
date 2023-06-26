@@ -6,14 +6,26 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="{{ path('blog_list') }}">
-                <i class='bx bx-book-alt'></i>
-                <span class="link_name">Posts</span>
-            </a>
+            <div class="icon-link">
+                <a href="{{ path('blog_list') }}">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="link_name">Posts</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li>
+                    <a href="{{ path('blog_new') }}">Créer un post</a>
+                </li>
+            </ul>
         </li>
         <li>
             <div class="icon-link">
-                <a href="#">
+                {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{path('admin_new_category')}}">
+                {% else %}
+                    <a href="#">
+                {% endif %}
                     <i class='bx bx-collection'></i>
                     <span class="link_name">Category</span>
                 </a>

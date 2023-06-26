@@ -42,6 +42,7 @@ class PostController extends AbstractController
     #[Route('/new', name: 'new')]
     public function newBlog(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $post = new Post();
         $form = $this->createForm(PostFormType::class, $post);
         $form->handleRequest($request);
@@ -74,6 +75,13 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         $post = $postRepository->find($id);
+        if ($post == null) {
+            $route = $request->headers->get('referer');
+            if ($route === null) {
+                return $this->redirectToRoute('blog_list');
+            }
+            return $this->redirect($route);
+        }
         $commentsData = $commentRepository->list($post);
         $lastposts = $postRepository->lastPosts($id);
 

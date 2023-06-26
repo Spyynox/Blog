@@ -15,19 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
 {
-    #[Route('/', name: 'app_admin')]
-    public function index(CategoryRepository $categoryRepository): Response
-    {
-        $data = $categoryRepository->findAll();
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'data' => $data
-        ]);
-    }
-
     #[Route('/category/new', name: 'new_category')]
     public function newBlog(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $post = new Category();
         $form = $this->createForm(CategoryFormType::class, $post);
         $form->handleRequest($request);
