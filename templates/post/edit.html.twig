@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New blog{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/post/style.css') }}">
+{% endblock %}
+
+{% block body %}
+    {{ form_start(postForm) }}
+		<section class="gradient-custom">
+			<div class="container py-3 h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-8">
+						<div class="card bg-dark text-white mb-2 rounded-10">
+							<div class="card-body p-5 text-center">
+								<div>
+									<h2 class="fw-bold mb-2 text-uppercase">Éditer mon blog</h2>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(postForm.title) }}
+									</div>
+
+									<div class="form-outline form-white mb-4">
+										{{ form_row(postForm.content) }}
+									</div>
+
+                                    <label for="category-search_multi" class="mb-2">Catégories</label>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <select class="form-select w-100" id="category-search_multi" data-placeholder="Please choose an category" name="post_form[categories][]" multiple="multiple" required="required">
+                                            {% for label, value in field_choices(postForm.categories) %}
+                                                <option value="{{value}}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+									</div>
+
+									<div class="form-outline form-white mt-2 mb-4">
+										{{ form_row(postForm.image) }}
+									</div>
+
+                                    {{ form_row(postForm._token) }}
+
+									<button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Create blog</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+    {{ form_end(postForm, {'render_rest': false}) }}
+
+    <script type="text/javascript" src="{{ asset('js/post/newPost.js') }}"></script>
+
+{% endblock %}

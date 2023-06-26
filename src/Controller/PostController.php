@@ -103,6 +103,38 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(Post $post, Request $request, EntityManagerInterface $em, int $id): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (
+            $post->getAuthor()->getUsername() === $this->getUser()->getUserIdentifier() ||
+            in_array('ROLE_ADMIN', $post->getAuthor()->getRoles())
+            )
+        {
+            $form = $this->createForm(PostFormType::class, $post);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $post->setUpdatedAt(new \DateTimeImmutable);
+                $em->persist($post);
+                $em->flush();
+                return $this->redirectToRoute('blog_detail', [
+                    'id' => $post->getId()
+                ]);
+            }
+            return $this->render('post/edit.html.twig', [
+                'id' => $id,
+                'postForm' => $form->createView()
+            ]);
+        } else {
+            $route = $request->headers->get('referer');
+            if ($route === null) {
+                return $this->redirectToRoute('blog_list');
+            }
+            return $this->redirect($route);
+        }
+    }
+
     #[Route('/category/{id}', name: 'posts_in_category')]
     public function postsInCategorie(
         PostRepository $postRepository, CategoryRepository $categoryRepository, int $id,
