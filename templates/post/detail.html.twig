@@ -32,7 +32,10 @@
                 </div>
 
                 <div>
-                    <h2 class="tm-color-primary tm-post-title">Comments ({{comments|length}})</h2>
+                    <h2 class="tm-color-primary tm-post-title">
+                        Comments
+                        (<span class="tm-color-primary tm-post-title comments-length">{{comments|length}}</span>)
+                    </h2>
                     <hr class="tm-hr-primary tm-mb-45">
                     {% for comment in comments %}
                         <div class="comment-container" data-id="{{comment.id}}">
@@ -126,13 +129,16 @@
             const key = $('#removeComentModal').attr('data-key');
             let url = "{{ path('comment_api_remove', {'id': '__ID__'}) }}";
             url = url.replace("__ID__", key);
+            let commentsLength = $('.comments-length');
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: {},
                 success: function () {
+                    let commentsLengthInt = parseInt(commentsLength.text()) - 1;
                     $(`.comment-container[data-id="${key}"]`).remove();
                     $('#removeComentModal').modal('hide');
+                    commentsLength.text(commentsLengthInt);
                 }
             });
         });
