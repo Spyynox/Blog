@@ -7,6 +7,9 @@
 {% block body %}
     {% set today = "now"|date('d-m-Y H:i') %}
     <h2 class="text-primary text-center">{{category.title}}</h2>
+    {% if posts|length == 0 %}
+        <div>Il n'y a pas de blog de la catégorie {{category.title}}? <a href="{{path('blog_new')}}">Créez-en un!</a></div>
+    {% endif %}
     <div class="row">
         {% for post in posts %}
             {% set datePost = post.createdAt|date('d-m-Y H:i') %}
@@ -36,7 +39,11 @@
                     <span class="tm-color-primary">
                         {% for categoryIndex, c in post.categories %}
                             {% if categoryIndex < 2 and post.categories|length > 1 %}
-                                {{c.title}} |
+                                {% if categoryIndex == post.categories|length - 1 %}
+                                    {{c.title}}
+                                {% else %}
+                                    {{c.title}} |
+                                {% endif %}
                             {% elseif categoryIndex == 2 %}
                                 {{c.title}}
                             {% endif %}

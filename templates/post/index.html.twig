@@ -41,7 +41,11 @@
                     <span class="tm-color-primary">
                         {% for categoryIndex, c in post.categories %}
                             {% if categoryIndex < 2 and post.categories|length > 1 %}
-                                {{c.title}} |
+                                {% if categoryIndex == post.categories|length - 1 %}
+                                    {{c.title}}
+                                {% else %}
+                                    {{c.title}} |
+                                {% endif %}
                             {% elseif categoryIndex == 2 %}
                                 {{c.title}}
                             {% endif %}
