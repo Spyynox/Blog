@@ -50,6 +50,7 @@ class PostController extends AbstractController
             if (count($post->getCategories()) === 0) {
                 throw new BadRequestHttpException('Please select at least one category', null, 400);
             }
+            $post->setPublished(true);
             $post->setUserId($this->getUser());
 
             $entityManager->persist($post);
