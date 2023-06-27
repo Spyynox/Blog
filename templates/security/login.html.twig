@@ -15,31 +15,31 @@
                     <div class="card bg-dark text-white mb-2 rounded-10">
                         <div class="card-body p-5 text-center">
                             <div>
-                                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                                <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
                                 <div class="form-outline form-white mb-4">
-                                    <label for="inputUsername" class="form-label">Username</label>
+                                    <label for="inputUsername" class="form-label">Nom d'utilisateur</label>
                                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control form-control-lg" autocomplete="username" required autofocus>
                                 </div>
 
                                 <div class="form-outline form-white mb-4">
-                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <label for="inputPassword" class="form-label">Mot de passe</label>
                                     <input type="password" name="password" id="inputPassword" class="form-control form-control-lg" autocomplete="current-password" required>
                                 </div>
 
                                 <div class="checkbox mb-3">
                                     <label>
-                                        <input type="checkbox" name="_remember_me"> Remember me
+                                        <input type="checkbox" name="_remember_me"> <span class="ml-1 text-white">Se rappeler de moi</span>
                                     </label>
                                 </div>
 
                                 <input type="hidden" name="_csrf_token"
                                     value="{{ csrf_token('authenticate') }}"
                                 >
-                                <button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Sign in</button>
+                                <button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Se connecter</button>
 
 								<div class="mt-3">
-									<div class="mb-0">Don't have an account?
-										<a href="{{ path('app_register') }}" class="text-white-50 fw-bold">Sign Up</a>
+									<div class="mb-0">Pas encore de compte?
+										<a href="{{ path('app_register') }}" class="text-white-50 fw-bold">Inscrivez-vous</a>
 									</div>
 								</div>
                             </div>
