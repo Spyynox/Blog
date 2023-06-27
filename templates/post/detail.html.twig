@@ -13,7 +13,7 @@
                         <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
                         <div class="d-flex mt-2">
                             <a class="text-primary mr-2" href="{{ path('blog_edit', {id: post.id}) }}">Éditer</a>
-                            <a class="text-danger" href="#">Supprimer</a>
+                            <span class="text-danger pointer remove-post" data-key="{{post.id}}">Supprimer</span>
                         </div>
                     </div>
                     <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by
@@ -117,12 +117,33 @@
             </div>
         </aside>
     </div>
+    {% include 'post/modalRemovePost.html.twig' %}
     {% include 'comment/modalRemoveComment.html.twig' %}
     <script type="text/javascript">
+        $('.remove-post').click(function () {
+            const key = $(this).attr('data-key');
+            $('#removePostModal').attr('data-key', key);
+            $('#removePostModal').modal();
+        });
+
         $('.commentRemove').click(function () {
             const key = $(this).attr('data-key');
             $('#removeComentModal').attr('data-key', key);
             $('#removeComentModal').modal();
+        });
+
+        $('#remove-post_submit').click(function () {
+            const key = $('#removePostModal').attr('data-key');
+            let url = "{{ path('blog_api_remove', {'id': '__ID__'}) }}";
+            url = url.replace("__ID__", key);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {},
+                success: function () {
+                    document.location.href = "{{ path('blog_list') }}";;
+                }
+            });
         });
 
         $('#remove-comment_submit').click(function () {

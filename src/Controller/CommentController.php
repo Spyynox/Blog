@@ -48,7 +48,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/published-status/{id}', name: 'api_remove')]
-    public function changePublisedStatus(Comment $comment, Request $request, EntityManagerInterface $em): Response
+    public function changePublisedStatus(Comment $comment, EntityManagerInterface $em): Response
     {
         $comment->setPublished(false);
         $comment->setUpdatedAt(new \DateTimeImmutable);

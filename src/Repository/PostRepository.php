@@ -39,10 +39,21 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    function allPosts(): array
+    {
+        return $this->createQueryBuilder('p')
+           ->where('p.published = true')
+           ->orderBy('p.createdAt', 'DESC')
+           ->getQuery()
+           ->getResult()
+        ;
+    }
+
     function lastPosts(int $id): array
     {
         $qb = $this->createQueryBuilder('p');
         $qb->where($qb->expr()->notIn('p.id', ':id'))
+           ->andWhere('p.published = true')
            ->setParameter('id', $id)
            ->orderBy('p.createdAt', 'DESC')
            ->setMaxResults(3)

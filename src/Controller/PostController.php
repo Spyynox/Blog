@@ -23,10 +23,7 @@ class PostController extends AbstractController
     #[Route('/', name: 'list')]
     public function index(Request $request, PaginatorInterface $paginator, PostRepository $postRepository): Response
     {
-        if ($this->getUser() === null) {
-            return $this->redirectToRoute('app_login');
-        }
-        $data = $postRepository->findBy([],['createdAt' => 'desc']);
+        $data = $postRepository->allPosts();
 
         $posts = $paginator->paginate(
             $data,
@@ -75,6 +72,9 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         $post = $postRepository->find($id);
+        if ($post->isPublished() === false) {
+            return $this->redirectToRoute('blog_list');
+        }
         if ($post == null) {
             $route = $request->headers->get('referer');
             if ($route === null) {
@@ -142,6 +142,18 @@ class PostController extends AbstractController
             }
             return $this->redirect($route);
         }
+    }
+
+    #[Route('/api/published-status/{id}', name: 'api_remove')]
+    public function changePublisedStatus(Post $post, EntityManagerInterface $em): Response
+    {
+        $post->setPublished(false);
+        $post->setUpdatedAt(new \DateTimeImmutable);
+
+        $em->persist($post);
+        $em->flush();
+
+        return new Response('Your post is deleted', 200);
     }
 
     #[Route('/category/{id}', name: 'posts_in_category')]
