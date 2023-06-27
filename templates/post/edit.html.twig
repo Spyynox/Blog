@@ -17,11 +17,11 @@
 									<h2 class="fw-bold mb-2 text-uppercase">Éditer mon blog</h2>
 
 									<div class="form-outline form-white mb-4">
-										{{ form_row(postForm.title) }}
+										{{ form_row(postForm.title, { 'label': 'Titre' }) }}
 									</div>
 
 									<div class="form-outline form-white mb-4">
-										{{ form_row(postForm.content) }}
+										{{ form_row(postForm.content, { 'label': 'Contenu' }) }}
 									</div>
 
                                     <label for="category-search_multi" class="mb-2">Catégories</label>
@@ -35,12 +35,12 @@
 									</div>
 
 									<div class="form-outline form-white mt-2 mb-4">
-										{{ form_row(postForm.image) }}
+										{{ form_row(postForm.image, { 'label': 'Image' }) }}
 									</div>
 
                                     {{ form_row(postForm._token) }}
 
-									<button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Create blog</button>
+									<button class="btn btn-outline-light btn-lg px-5 mt-2" type="submit">Modifier</button>
 								</div>
 							</div>
 						</div>
