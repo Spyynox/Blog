@@ -11,10 +11,12 @@
                 <div class="mb-4">
                     <div class="d-flex justify-content-between">
                         <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
-                        <div class="d-flex mt-2">
-                            <a class="text-primary mr-2" href="{{ path('blog_edit', {id: post.id}) }}">Éditer</a>
-                            <span class="text-danger pointer remove-post" data-key="{{post.id}}">Supprimer</span>
-                        </div>
+                        {% if app.user and (post.author.id == app.user.id or 'ROLE_ADMIN' in app.user.roles) %}
+                            <div class="d-flex mt-2">
+                                <a class="text-primary mr-2" href="{{ path('blog_edit', {id: post.id}) }}">Éditer</a>
+                                <span class="text-danger pointer remove-post" data-key="{{post.id}}">Supprimer</span>
+                            </div>
+                        {% endif %}
                     </div>
                     <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by
                         <a href="{{ path('user_profile', {id: post.author.id}) }}">{{post.author.username}}</a>
