@@ -18,7 +18,7 @@
                             </div>
                         {% endif %}
                     </div>
-                    <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posted by
+                    <p class="tm-mb-40">{{post.createdAt|date('M d, Y', 'Europe/Paris')}} posté par
                         <a href="{{ path('user_profile', {id: post.author.id}) }}">{{post.author.username}}</a>
                     </p>
                     <p>{{post.content|nl2br}}</p>
@@ -35,7 +35,7 @@
 
                 <div>
                     <h2 class="tm-color-primary tm-post-title">
-                        Comments
+                        Commentaires
                         (<span class="tm-color-primary tm-post-title comments-length">{{comments|length}}</span>)
                     </h2>
                     <hr class="tm-hr-primary tm-mb-45">
@@ -77,10 +77,10 @@
                             {{ form_start(commmentForm) }}
                                 <h2 class="tm-color-primary tm-post-title mb-4">Créez votre commentaire</h2>
                                 <div class="mb-4">
-                                    {{ form_row(commmentForm.content) }}
+                                    {{ form_row(commmentForm.content, { 'label': 'Contenu' }) }}
                                 </div>
                                 <div class="text-right">
-                                    <button class="tm-btn tm-btn-primary tm-btn-small" type="submit">Submit</button>
+                                    <button class="tm-btn tm-btn-primary tm-btn-small" type="submit">Ajouter</button>
                                 </div>
                             {{ form_end(commmentForm) }}
                         {% else %}
