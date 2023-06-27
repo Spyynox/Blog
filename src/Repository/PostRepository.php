@@ -66,6 +66,7 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb->join('p.categories', 'c')
            ->where($qb->expr()->in('c.id', ':id'))
+           ->andWhere('p.published = true')
            ->setParameter('id', $id)
            ->orderBy('p.createdAt', 'DESC')
         ;
