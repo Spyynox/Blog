@@ -77,7 +77,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
             ])
 
-            ->add('plainPassword', PasswordType::class, [
+            ->add('password', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control form-control-lg'],
                 'label_attr' => ['class' => 'form-label'],
