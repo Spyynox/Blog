@@ -82,7 +82,7 @@ class UserFormType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'max' => 255,
+                        'max' => 4096,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
                     ]),

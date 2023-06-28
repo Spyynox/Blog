@@ -34,6 +34,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column(length: 4096)]
+    #[Assert\Length(
+        min: 6,
+        max: 4096,
+        minMessage: 'Your password should be at least {{ limit }} characters',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -131,7 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
