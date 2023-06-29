@@ -5,7 +5,7 @@ namespace App\Tests\Unit;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class EntityTest extends KernelTestCase
+class UserTest extends KernelTestCase
 {
     public function getEntity(): User
     {
