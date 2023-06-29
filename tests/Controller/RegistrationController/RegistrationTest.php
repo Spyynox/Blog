@@ -5,9 +5,9 @@ namespace App\Tests\Functional;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class RegistrationController extends WebTestCase
+class RegistrationTest extends WebTestCase
 {
-    public function testLoginWorks(): void
+    public function testRegistrationWorks(): void
     {
         $client = static::createClient();
         $urlGenerator = $client->getContainer()->get('router');
