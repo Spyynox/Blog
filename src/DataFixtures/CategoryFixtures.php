@@ -3,32 +3,13 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use Faker\Factory;
-use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class AppFixtures extends Fixture
+class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
-        $users = array();
-        for ($i = 0; $i < 3; $i++) {
-            $users[$i] = new User();
-            $users[$i]->setUsername($faker->firstName());
-            $users[$i]->setFirstname($faker->firstName());
-            $users[$i]->setLastname($faker->lastName());
-            $users[$i]->setEmail($faker->email());
-            $users[$i]->setPassword($faker->password());
-            $users[$i]->setDescription($faker->text(50));
-            $manager->persist($users[$i]);
-        }
-        $this->addCategories($manager);
-        $manager->flush();
-    }
-
-    private function addCategories($manager): void {
         $category = new Category();
         $category->setTitle('Mode');
         $manager->persist($category);
@@ -140,5 +121,7 @@ class AppFixtures extends Fixture
         $category = new Category();
         $category->setTitle('Autres');
         $manager->persist($category);
+
+        $manager->flush();
     }
 }
