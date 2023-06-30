@@ -21,7 +21,7 @@ class RegistrationTest extends WebTestCase
             'registration_form[username]' => 'Post 99',
             'registration_form[firstname]' => 'Post99',
             'registration_form[lastname]' => 'P99',
-            'registration_form[username]' => 'post99@symblog.fr',
+            'registration_form[email]' => 'post99@gmail.com',
             'registration_form[description]' => 'deknf klfnsjfnjzk jzekzdk',
             'registration_form[logo]' => 'https://wotpack.ru/wp-content/uploads/2023/05/1-18.jpg',
             'registration_form[password]' => 'Post 99',
