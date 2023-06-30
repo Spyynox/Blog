@@ -2,7 +2,6 @@
 
 namespace App\Tests\Functional;
 
-use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -14,13 +13,10 @@ class BlogPublisedStatusTest extends WebTestCase
         $client = static::createClient();
 
         $userRepository = $client->getContainer()->get(UserRepository::class);
-        $postRepository = $client->getContainer()->get(PostRepository::class);
-        
-        $post = $postRepository->findOneBy([]);
-        $user = $userRepository->find($post->getAuthor()->getId());
-        
-        $postId = $user->getComments()->first()->getId();
-        
+
+        $user = $userRepository->findOneBy([]);
+        $postId = $user->getPosts()->first()->getId();
+
         $urlGenerator = $client->getContainer()->get('router');
         $client->loginUser($user);
 
