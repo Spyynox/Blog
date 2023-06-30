@@ -98,7 +98,7 @@
         <aside class="col-lg-4 tm-aside-col">
             <div class="tm-post-sidebar">
                 <hr class="mb-3 tm-hr-primary">
-                <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
+                <h2 class="mb-4 tm-post-title tm-color-primary title-category">Catégories</h2>
                 <ul class="tm-mb-75 pl-5 tm-category-list">
                     {% for category in post.categories %}
                         <li>
@@ -107,7 +107,7 @@
                     {% endfor %}
                 </ul>
                 <hr class="mb-3 tm-hr-primary">
-                <h2 class="tm-mb-40 tm-post-title tm-color-primary">Derniers Blogs</h2>
+                <h2 class="tm-mb-40 tm-post-title tm-color-primary title-last_blogs">Derniers Blogs</h2>
                 {% for lastpost in lastposts %}
                     <a href="{{ path('blog_detail', {id: lastpost.id}) }}" class="d-block tm-mb-40">
                         <figure>
