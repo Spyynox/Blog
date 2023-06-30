@@ -12,13 +12,10 @@ class LogoutTest extends WebTestCase
     {
         $client = static::createClient();
 
-        /** @var UserRepository */
         $userRepository = $client->getContainer()->get(UserRepository::class);
 
-        /** @var UrlGeneratorInterface */
         $urlGenerator = $client->getContainer()->get('router');
 
-        /** @var User */
         $user = $userRepository->findOneBy([]);
 
         $client->loginUser($user);
