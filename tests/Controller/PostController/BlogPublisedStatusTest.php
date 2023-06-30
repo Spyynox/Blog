@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ChangePublisedStatusTest extends WebTestCase
+class BlogPublisedStatusTest extends WebTestCase
 {
     public function testChangePublisedStatusTest(): void
     {

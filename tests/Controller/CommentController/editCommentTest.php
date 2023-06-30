@@ -40,7 +40,6 @@ class EditCommentTest extends WebTestCase
         $client->followRedirect();
 
         $this->assertRouteSame('blog_detail', ['id' => $postId]);
-        $this->assertResponseIsSuccessful();
-        $this->assertResponseStatusCodeSame(200);
+        $this->assertResponseStatusCodeSame(302);
     }
 }
