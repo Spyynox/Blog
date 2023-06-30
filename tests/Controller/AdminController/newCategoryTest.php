@@ -6,7 +6,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class newCategoryTest extends WebTestCase
+class NewCategoryTest extends WebTestCase
 {
     public function testsumbitCategoryWorks(): void
     {

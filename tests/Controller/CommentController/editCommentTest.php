@@ -7,7 +7,7 @@ use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class editCommentTest extends WebTestCase
+class EditCommentTest extends WebTestCase
 {
     public function testsumbitEditCommentWorks(): void
     {
