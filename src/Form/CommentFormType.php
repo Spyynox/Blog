@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -16,12 +15,7 @@ class CommentFormType extends AbstractType
         $builder
             ->add('content', TextareaType::class, [
                 'attr' => ['class' => 'form-control', 'rows' => '6'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a content',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
         ;
     }

@@ -16,7 +16,7 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Le contenu est vide')]
     private ?string $content = null;
 
     #[ORM\Column]
