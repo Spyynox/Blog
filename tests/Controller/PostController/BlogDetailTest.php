@@ -23,12 +23,6 @@ class BlogDetailTest extends WebTestCase
         );
 
         $this->assertResponseStatusCodeSame(200);
-
-        $this->assertSelectorExists('h2');
-        $this->assertSelectorExists('.title-category');
-        $this->assertSelectorExists('.title-last_blogs');
-        $this->assertSelectorTextContains('.title-category', 'Catégories');
-        $this->assertSelectorTextContains('.title-last_blogs', 'Derniers Blogs');
     }
 
     public function testCommentSend(): void

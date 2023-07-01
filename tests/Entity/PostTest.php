@@ -61,6 +61,6 @@ class PostTest extends KernelTestCase
         $post->setPublished(false);
 
         $errors = $container->get('validator')->validate($post);
-        $this->assertCount(3, $errors);
+        $this->assertCount(4, $errors);
     }
 }

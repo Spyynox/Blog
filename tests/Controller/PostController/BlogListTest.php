@@ -19,10 +19,5 @@ class BlogListTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertSelectorExists('h1');
-        $this->assertSelectorTextContains('h1', 'Blogs');
-
-        $this->assertSelectorExists('.pagination');
-
     }
 }

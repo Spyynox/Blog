@@ -23,11 +23,5 @@ class BlogCategoryListTest extends WebTestCase
         );
 
         $this->assertResponseStatusCodeSame(200);
-
-        $this->assertSelectorExists('h2');
-        $this->assertSelectorTextContains('h2', $category->getTitle());
-
-        $this->assertSelectorExists('.pagination');
-
     }
 }

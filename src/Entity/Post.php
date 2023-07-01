@@ -19,11 +19,15 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Le titre est vide')]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Le contenu est vide')]
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Le contenu doit porter au moins {{ limit }} lettres',
+    )]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -33,7 +37,7 @@ class Post
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 1500)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'L\'image est vide')]
      private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]

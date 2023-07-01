@@ -72,9 +72,6 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         $post = $postRepository->find($id);
-        if ($post->isPublished() === false) {
-            return $this->redirectToRoute('blog_list');
-        }
         if ($post == null) {
             $route = $request->headers->get('referer');
             if ($route === null) {

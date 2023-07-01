@@ -7,8 +7,6 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,36 +19,17 @@ class PostFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a title',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('content', TextareaType::class, [
                 'attr' => ['class' => 'form-control form-control-lg', 'rows' => '10'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a content',
-                    ]),
-                    new Length([
-                        'min' => 10,
-                        'minMessage' => 'Your content should be at least {{ limit }} characters',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('image', UrlType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a image',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('categories', EntityType::class, [
