@@ -6,9 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,45 +22,22 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a username',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('firstname', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a firstname',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('lastname', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a lastname',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a email',
-                    ]),
-                    new Email([
-                        'message' => 'The email {{ value }} is not a valid email.',
-                    ]),
-                ],
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('description', TextareaType::class, [
