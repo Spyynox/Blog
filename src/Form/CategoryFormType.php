@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -16,12 +15,7 @@ class CategoryFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a title',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
         ;
     }

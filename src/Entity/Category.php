@@ -19,7 +19,7 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 20, unique: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Le titre est vide')]
     private ?string $title = null;
 
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'categories')]
