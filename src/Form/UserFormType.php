@@ -22,45 +22,22 @@ class UserFormType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a username',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('firstname', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a firstname',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('lastname', TextType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a lastname',
-                    ]),
-                ]
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a email',
-                    ]),
-                    new Email([
-                        'message' => 'The email {{ value }} is not a valid email.',
-                    ]),
-                ],
+                'label_attr' => ['class' => 'form-label']
             ])
 
             ->add('description', TextareaType::class, [
@@ -78,15 +55,7 @@ class UserFormType extends AbstractType
             ->add('password', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control form-control-lg'],
-                'label_attr' => ['class' => 'form-label'],
-                'constraints' => [
-                    new Length([
-                        'min' => 6,
-                        'max' => 4096,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                    ]),
-                ],
+                'label_attr' => ['class' => 'form-label']
             ])
         ;
     }
