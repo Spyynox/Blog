@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 16, unique: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Le nom d\'utilisateur est vide')]
     private ?string $username = null;
 
     #[ORM\Column(type: Types::ARRAY)]
@@ -42,17 +42,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 16)]
+    #[Assert\NotBlank(message: 'Le prénom est vide')]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 16)]
+    #[Assert\NotBlank(message: 'Le nom de famille est vide')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
+    #[Assert\NotBlank(message: 'L\'email est vide')]
+    #[Assert\Email(message: 'Cette email " {{ value }} " n\'est pas un email valide.')]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
